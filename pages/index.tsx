@@ -1,16 +1,6 @@
 import type { NextPage } from "next";
-import { trpc } from "../utils/trpc";
+import Hello from "../components/Hello";
 
-const Home: NextPage = () => {
-  const hello = trpc.hello.useQuery({ text: "client" });
-  if (!hello.data) {
-    return <div>Loading...</div>;
-  }
-  return (
-    <div>
-      <p>{hello.data.greeting}</p>
-    </div>
-  );
-};
+const Home: NextPage = () => <Hello />;
 
 export default Home;

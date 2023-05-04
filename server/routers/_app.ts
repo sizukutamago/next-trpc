@@ -1,12 +1,11 @@
-import { z } from "zod";
-import { procedure, router } from "../trpc";
+import { router } from "../trpc";
+import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
+import { helloRouter } from "./hello";
 
 export const appRouter = router({
-  hello: procedure.input(z.object({ text: z.string() })).query(({ input }) => {
-    return {
-      greeting: `Hello ${input.text}!`,
-    };
-  }),
+  greeting: helloRouter,
 });
 
 export type AppRouter = typeof appRouter;
+export type RouterInput = inferRouterInputs<AppRouter>;
+export type RouterOutput = inferRouterOutputs<AppRouter>;
